@@ -1,0 +1,90 @@
+<form
+  class="flex flex-col gap-3 w-full"
+  [formGroup]="editTaskForm"
+  (ngSubmit)="onSubmit()"
+>
+  <input
+    class="rounded-lg p-2 outline-0 border-1"
+    placeholder="Title"
+    id="title"
+    name="title"
+    formControlName="title"
+  />
+  <label
+    for="title"
+    class="text-sm -mt-2 text-red-500"
+    *ngIf="
+      (editTaskForm.dirty || editTaskForm.touched) &&
+      editTaskForm.hasError('required', ['title'])
+    "
+  >
+    Title is required.
+  </label>
+
+  <textarea
+    class="rounded-lg p-2 outline-0 border-1 w-full"
+    placeholder="Description"
+    id="description"
+    name="description"
+    formControlName="description"
+  ></textarea>
+
+  <section>
+    <label for="priority">Priority:</label>
+    <select
+      name="priority"
+      id="priority"
+      class="p-2 border rounded-lg ml-1"
+      formControlName="priority"
+      required
+    >
+      <option value="High">High</option>
+      <option value="Mid" selected>Mid</option>
+      <option value="Low">Low</option>
+    </select>
+  </section>
+
+  <section class="flex gap-6">
+    <div>
+      <label for="date" class="relative">
+        Due Date
+        <span class="text-red-500 absolute text-xs top-0 right-5">*</span>:
+      </label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        min="{{ minDate }}"
+        class="ml-1 w-fit"
+        formControlName="date"
+        required
+      />
+    </div>
+    <div>
+      <label for="time" class="relative">
+        Time
+        <span class="text-red-500 absolute text-xs top-0 right-5">*</span>:
+      </label>
+      <input
+        type="time"
+        id="time"
+        name="time"
+        required
+        formControlName="time"
+      />
+    </div>
+  </section>
+
+  <div class="flex gap-2">
+    <app-button
+      type="submit"
+      btnClass="bg-green-800 hover:scale-110 transition-all"
+      text="Edit"
+    />
+    <app-button
+      btnClass="bg-gray-500 hover:scale-110 transition-all"
+      text="Cancel"
+      (handleClick)="handleCancel()"
+    />
+  </div>
+</form>

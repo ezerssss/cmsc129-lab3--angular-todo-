@@ -1,0 +1,8 @@
+<button
+  class="{{ mergedClass() }}"
+  (click)="onClick()"
+  type="{{ type() }}"
+  [attr.disabled]="btnDisabled() || null"
+>
+  {{ text() }}
+</button>

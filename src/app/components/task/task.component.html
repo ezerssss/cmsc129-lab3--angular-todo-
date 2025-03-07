@@ -1,0 +1,44 @@
+<li
+  class="flex justify-between border-gray-300 border p-4 rounded-lg gap-10 mb-4"
+>
+  <div class="flex gap-2 flex-1">
+    <input type="checkbox" />
+    <div>
+      <p class="text-gray-400 text-xs">#{{ task()?.id?.substring(0, 6) }}...</p>
+      <h2 class="font-bold text-lg">{{ task()?.title }}</h2>
+      <p class="text-sm">
+        {{ task()?.description }}
+      </p>
+      <div class="flex gap-2 items-center mt-1">
+        <div class="{{ priorityClass() }}">
+          {{ task()?.priority }}
+        </div>
+        <p class="text-xs text-gray-400">
+          {{ task()?.dueDate?.toLocaleString() }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="space-y-2 w-6 max-w-6 overflow-hidden">
+    <button
+      class="block cursor-pointer hover:scale-110 transition-all"
+      (click)="handleEditButton()"
+    >
+      <img class="w-full" src="/icons/pencil.svg" alt="edit" />
+    </button>
+    <button
+      (click)="handleDelete()"
+      class="block cursor-pointer hover:scale-110 transition-all"
+    >
+      <img class="w-full" src="/icons/trash-2.svg" alt="edit" />
+    </button>
+  </div>
+</li>
+@if (isEditing()) {
+<edit-task
+  (onCancel)="handleEditButton()"
+  [task]="task()"
+  (onEditTask)="handleEdit($event)"
+/>
+}
