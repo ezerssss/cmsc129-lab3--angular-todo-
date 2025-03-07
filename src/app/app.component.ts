@@ -64,7 +64,9 @@ export class AppComponent {
       case 'DateAdded+':
       case 'DateAdded-':
         return this.tasks().sort(
-          (a, b) => a.dateAdded.getTime() - b.dateAdded.getTime()
+          (a, b) =>
+            (a.dateAdded.getTime() - b.dateAdded.getTime()) *
+            (this.sortBy() == 'DateAdded+' ? 1 : -1)
         );
     }
 

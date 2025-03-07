@@ -21,8 +21,9 @@
       id="sortBy"
       class="p-2 border rounded-lg ml-1"
       (change)="handleChangeSort($event)"
+      [value]="sortBy()"
     >
-      <option value="Priority+" selected>Priority (High - Low)</option>
+      <option value="Priority+">Priority (High - Low)</option>
       <option value="Priority-">Priority (Low - High)</option>
       <option value="DueDate+">Due Date closest to now</option>
       <option value="DueDate-">Due Date farthest from now</option>
